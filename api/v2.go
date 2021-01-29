@@ -5,7 +5,7 @@ package api
 
 import (
 	"context"
-	"fmt"
+	//"fmt"
 	"time"
 
 	"github.com/ava-labs/ortelius/services/metrics"
@@ -203,10 +203,10 @@ func (c *V2Context) ListTransactions(w web.ResponseWriter, r *web.Request) {
 
 	p.ChainIDs = params.ForValueChainID(c.chainID, p.ChainIDs)
 
-	if p.ListParams.Offset > DefaultOffsetLimit {
-		c.WriteErr(w, 400, fmt.Errorf("invalid offset"))
-		return
-	}
+	//if p.ListParams.Offset > DefaultOffsetLimit {
+	//	c.WriteErr(w, 400, fmt.Errorf("invalid offset"))
+	//	return
+	//}
 
 	c.WriteCacheable(w, Cacheable{
 		TTL: 5 * time.Second,
@@ -241,10 +241,10 @@ func (c *V2Context) ListTransactionsPost(w web.ResponseWriter, r *web.Request) {
 
 	p.ChainIDs = params.ForValueChainID(c.chainID, p.ChainIDs)
 
-	if p.ListParams.Offset > DefaultOffsetLimit {
-		c.WriteErr(w, 400, fmt.Errorf("invalid offset"))
-		return
-	}
+	//if p.ListParams.Offset > DefaultOffsetLimit {
+	//	c.WriteErr(w, 400, fmt.Errorf("invalid offset"))
+	//	return
+	//}
 
 	c.WriteCacheable(w, Cacheable{
 		TTL: 5 * time.Second,
