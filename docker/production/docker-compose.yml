@@ -5,7 +5,7 @@ services:
   mysql:
     image: "mysql:8.0.22"
     volumes:
-      - /var/lib/ortelius/mysql:/var/lib/mysql
+      - /data/lib/ortelius/mysql:/data/lib/mysql
       - ./../my.cnf:/etc/mysql/my.cnf
     ports:
       - "3306:3306"
@@ -40,8 +40,8 @@ services:
       - ZOOKEEPER_CLIENT_PORT=2181
       - ZOOKEEPER_SERVERS=zookeeper:4182:5181
     volumes:
-      - /var/lib/ortelius/zookeeper/data:/var/lib/zookeeper/data/
-      - /var/lib/ortelius/zookeeper/logs:/var/lib/zookeeper/log/
+      - /data/lib/ortelius/zookeeper/data:/data/lib/zookeeper/data/
+      - /data/lib/ortelius/zookeeper/logs:/data/lib/zookeeper/log/
     restart: on-failure
   kafka:
     image: "confluentinc/cp-kafka:5.4.3"
@@ -51,7 +51,7 @@ services:
       - "9092:9092"
       - "29092:29092"
     volumes:
-      - /var/lib/ortelius/kafka:/var/lib/kafka/data/
+      - /vadatar/lib/ortelius/kafka:/data/lib/kafka/data/
     restart: on-failure
     environment:
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
@@ -91,7 +91,7 @@ services:
     image: "avaplatform/avalanchego:v1.1.3"
     command: /bin/sh -cx "exec ./build/avalanchego
       --network-id=$${NETWORKID}
-      --db-dir=/var/lib/avalanche
+      --db-dir=/data/lib/avalanche
       --log-level=info
       --http-host=0.0.0.0
       --ipcs-chain-ids=$${P_CHAINID},$${X_CHAINID}
@@ -100,7 +100,7 @@ services:
     ports:
       - "9650:9650"
     volumes:
-      - /var/lib/ortelius/avalanche:/var/lib/avalanche
+      - /data/lib/ortelius/avalanche:/data/lib/avalanche
       - avalanche-ipcs:/tmp
     depends_on:
       - producer
